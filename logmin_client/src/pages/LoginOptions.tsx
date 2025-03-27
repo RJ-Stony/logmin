@@ -8,13 +8,22 @@ const LoginOptions: React.FC = () => {
     navigate(path);
   };
 
+  // 각 버튼에 bold 스타일 적용
+  const buttonStyle = { fontWeight: "bold" };
+
   return (
     <div className="login-options">
-      <h2>로그인 옵션 선택</h2>
+      <h2 style={{ textAlign: "center" }}>로그인 옵션 선택</h2>
       <div className="button-group">
-        <button onClick={() => handleNavigate("/session")}>세션 로그인</button>
-        <button onClick={() => handleNavigate("/cookie")}>쿠키 로그인</button>
-        <button onClick={() => handleNavigate("/jwt")}>JWT 로그인</button>
+        <button style={buttonStyle} onClick={() => handleNavigate("/session")}>
+          세션
+        </button>
+        <button style={buttonStyle} onClick={() => handleNavigate("/cookie")}>
+          쿠키
+        </button>
+        <button style={buttonStyle} onClick={() => handleNavigate("/jwt")}>
+          JWT
+        </button>
       </div>
     </div>
   );

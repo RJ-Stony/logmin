@@ -11,22 +11,10 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <div>에러가 발생했습니다. 잠시 후 다시 시도해 주세요.</div>,
     children: [
-      {
-        path: "/",
-        element: <LoginOptions />,
-      },
-      {
-        path: "/session",
-        element: <SessionLogin />,
-      },
-      {
-        path: "/cookie",
-        element: <CookieLogin />,
-      },
-      {
-        path: "/jwt",
-        element: <JWTLogin />,
-      },
+      { path: "/", element: <LoginOptions /> },
+      { path: "/session", element: <SessionLogin /> },
+      { path: "/cookie", element: <CookieLogin /> },
+      { path: "/jwt", element: <JWTLogin /> },
     ],
   },
 ]);
