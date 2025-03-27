@@ -1,10 +1,10 @@
-# 🔥 Login Project 🔥
+# 🔥 Logmin Project 🔥
 
 ## 🚀 프로젝트 소개
 
 ## 💻 기술 스택
 
-* **프론트엔드:** React
+* **프론트엔드:** React + Typescript + Vite
 * **상태 관리:** 
 * **UI:** 
 * **기타:** 
