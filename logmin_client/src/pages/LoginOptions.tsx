@@ -13,16 +13,16 @@ const LoginOptions: React.FC = () => {
 
   return (
     <div className="login-options">
-      <h2 style={{ textAlign: "center" }}>로그인 옵션 선택</h2>
+      <h3 style={{ textAlign: "center" }}>원하는 로그인 방식 선택하기!</h3>
       <div className="button-group">
         <button style={buttonStyle} onClick={() => handleNavigate("/session")}>
-          세션
+          세션 방식
         </button>
         <button style={buttonStyle} onClick={() => handleNavigate("/cookie")}>
-          쿠키
+          쿠키 방식
         </button>
         <button style={buttonStyle} onClick={() => handleNavigate("/jwt")}>
-          JWT
+          JWT 방식
         </button>
       </div>
     </div>
