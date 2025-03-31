@@ -1,12 +1,14 @@
 import React from "react";
 
 interface ButtonProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onClick?: () => void;
   type?: "button" | "submit";
-  variant?: "default" | "back";
+  variant?: "default" | "back" | "outline" | "text";
   style?: React.CSSProperties;
   className?: string;
+  disabled?: boolean;
+  icon?: React.ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -16,28 +18,58 @@ const Button: React.FC<ButtonProps> = ({
   variant = "default",
   style,
   className = "",
+  disabled = false,
+  icon,
 }) => {
   const baseStyles: React.CSSProperties = {
-    padding: variant === "back" ? "0.75rem 0.75rem 0.75rem 0" : "0.75rem",
-    border: "none",
-    backgroundColor: variant === "back" ? "white" : "var(--service-color)",
-    color: "var(--text-color)",
-    fontSize: "1rem",
-    fontWeight: "bold",
-    cursor: "pointer",
-    borderRadius: "4px",
-    transition: "background-color 0.3s ease, transform 0.2s ease",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.5rem",
+    fontWeight: 600,
   };
 
-  const buttonClassName = `${className} ${variant}`;
+  const getVariantStyles = (): React.CSSProperties => {
+    switch (variant) {
+      case "back":
+        return {
+          backgroundColor: "var(--surface-color)",
+          color: "var(--text-color)",
+          padding: "0.75rem",
+          borderRadius: "50%",
+          height: "36px",
+          width: "36px",
+        };
+      case "outline":
+        return {
+          backgroundColor: "transparent",
+          color: "var(--primary-color)",
+          border: "1px solid var(--primary-color)",
+        };
+      case "text":
+        return {
+          backgroundColor: "transparent",
+          color: "var(--primary-color)",
+          padding: "0.5rem 0.75rem",
+        };
+      default:
+        return {};
+    }
+  };
+
+  const buttonClassName = `${className} ${variant} ${
+    disabled ? "disabled" : ""
+  }`;
 
   return (
     <button
       type={type}
       onClick={onClick}
-      style={{ ...baseStyles, ...style }}
+      style={{ ...baseStyles, ...getVariantStyles(), ...style }}
       className={buttonClassName}
+      disabled={disabled}
     >
+      {icon && <span className="button-icon">{icon}</span>}
       {children}
     </button>
   );

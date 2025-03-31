@@ -8,6 +8,9 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   required?: boolean;
+  error?: string;
+  icon?: React.ReactNode;
+  autoComplete?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -18,23 +21,32 @@ const Input: React.FC<InputProps> = ({
   onChange,
   label,
   required = false,
+  error,
+  icon,
+  autoComplete,
 }) => {
   return (
     <div className="input-wrapper">
       {label && (
         <label htmlFor={id} className="input-label">
           {label}
+          {required && <span className="required-mark">*</span>}
         </label>
       )}
-      <input
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        required={required}
-        className="input-field"
-      />
+      <div className={`input-container ${error ? "has-error" : ""}`}>
+        {icon && <span className="input-icon">{icon}</span>}
+        <input
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          required={required}
+          className={`input-field ${icon ? "has-icon" : ""}`}
+          autoComplete={autoComplete}
+        />
+      </div>
+      {error && <p className="input-error">{error}</p>}
     </div>
   );
 };
