@@ -7,8 +7,8 @@
   --text-color: #333333;
   --text-secondary: #6e7991;
   --border-color: #e0e4ee;
-  --error-color: #f44336;
-  --success-color: #00c853;
+  --error-color: rgb(234, 155, 149);
+  --success-color: rgb(133, 213, 166);
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 8px rgba(74, 108, 250, 0.12);
   --shadow-lg: 0 8px 16px rgba(74, 108, 250, 0.08);
