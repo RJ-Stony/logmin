@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import Input from "../common/Input";
+import { IoIosArrowBack } from "react-icons/io";
 
 const JWTLogin: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -38,14 +39,7 @@ const JWTLogin: React.FC = () => {
     }
   };
 
-  const backIcon = (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
+  const backIcon = <IoIosArrowBack />;
 
   const userIcon = (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none">

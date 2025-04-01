@@ -29,28 +29,36 @@ const Button: React.FC<ButtonProps> = ({
   disabled = false,
   icon,
 }) => {
-  const baseStyles: React.CSSProperties = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "0.5rem",
-    fontWeight: 600,
-    padding: "0.75rem 1.5rem",
-    borderRadius: "6px",
-    cursor: "pointer",
+  // ✅ variant에 따라 baseStyles를 다르게 적용
+  const getBaseStyles = (): React.CSSProperties => {
+    if (variant === "back") {
+      return {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        backgroundColor: "transparent",
+        padding: "0",
+        borderRadius: "0",
+        width: "auto",
+        height: "auto",
+      };
+    }
+
+    return {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "0.5rem",
+      fontWeight: 600,
+      padding: "0.75rem 1.5rem",
+      borderRadius: "6px",
+      cursor: "pointer",
+    };
   };
 
   const getVariantStyles = (): React.CSSProperties => {
     switch (variant) {
-      case "back":
-        return {
-          backgroundColor: "var(--surface-color)",
-          color: "var(--text-color)",
-          padding: "0.75rem",
-          borderRadius: "50%",
-          height: "36px",
-          width: "36px",
-        };
       case "outline":
         return {
           backgroundColor: "transparent",
@@ -97,7 +105,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       onClick={onClick}
-      style={{ ...baseStyles, ...getVariantStyles(), ...style }}
+      style={{ ...getBaseStyles(), ...getVariantStyles(), ...style }}
       className={buttonClassName}
       disabled={disabled}
     >

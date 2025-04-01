@@ -1,24 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
+import { IoIosArrowBack } from "react-icons/io";
 
 const SocialLogin: React.FC = () => {
   const navigate = useNavigate();
 
-  const backIcon = (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
+  const backIcon = <IoIosArrowBack />;
 
   const handleGoogleLogin = () => {
     window.location.href = "https://your-backend.com/auth/google";
@@ -40,29 +28,46 @@ const SocialLogin: React.FC = () => {
     iconSrc,
     alt,
     label,
-    dividerColor = "rgba(0, 0, 0, 0.2)",
+    dividerColor = "rgba(0,0,0,0.2)",
+    iconBoxWidth = 40,
   }: {
     iconSrc: string;
     alt: string;
     label: string;
     dividerColor?: string;
+    iconBoxWidth?: number;
   }) => (
-    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-      <img
-        src={iconSrc}
-        alt={alt}
-        width={20}
-        height={20}
-        style={{ display: "block" }}
-      />
-      <span
+    <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
+      {/* 아이콘 + 세로선 (고정 너비) */}
+      <div
         style={{
-          height: 20,
-          width: 1,
-          backgroundColor: dividerColor,
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+          width: `${iconBoxWidth}px`,
+          justifyContent: "flex-start",
         }}
-      />
-      <span>{label}</span>
+      >
+        <img
+          src={iconSrc}
+          alt={alt}
+          width={20}
+          height={20}
+          style={{ display: "block" }}
+        />
+        <span
+          style={{
+            height: 20,
+            width: 1,
+            backgroundColor: dividerColor,
+          }}
+        />
+      </div>
+
+      {/* 텍스트 영역 (유동적) */}
+      <div style={{ flex: 1 }}>
+        <span>{label}</span>
+      </div>
     </div>
   );
 
@@ -77,7 +82,7 @@ const SocialLogin: React.FC = () => {
           <SocialButtonContent
             iconSrc="/icons/google.svg"
             alt="Google"
-            label="Google 계정으로 로그인"
+            label="구글로 로그인"
             dividerColor="#ccc"
           />
         </Button>
@@ -85,7 +90,7 @@ const SocialLogin: React.FC = () => {
           <SocialButtonContent
             iconSrc="/icons/kakao.svg"
             alt="Kakao"
-            label="Kakao 계정으로 로그인"
+            label="카카오로 로그인"
             dividerColor="rgba(0,0,0,0.3)"
           />
         </Button>
@@ -93,7 +98,7 @@ const SocialLogin: React.FC = () => {
           <SocialButtonContent
             iconSrc="/icons/github.svg"
             alt="Github"
-            label="Github 계정으로 로그인"
+            label="깃허브로 로그인"
             dividerColor="rgba(255,255,255,0.4)"
           />
         </Button>
@@ -101,7 +106,7 @@ const SocialLogin: React.FC = () => {
           <SocialButtonContent
             iconSrc="/icons/naver.svg"
             alt="Naver"
-            label="Naver 계정으로 로그인"
+            label="네이버로 로그인"
             dividerColor="rgba(255,255,255,0.4)"
           />
         </Button>
