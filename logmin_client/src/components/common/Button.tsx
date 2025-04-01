@@ -4,7 +4,15 @@ interface ButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
   type?: "button" | "submit";
-  variant?: "default" | "back" | "outline" | "text";
+  variant?:
+    | "default"
+    | "back"
+    | "outline"
+    | "text"
+    | "google"
+    | "kakao"
+    | "github"
+    | "naver";
   style?: React.CSSProperties;
   className?: string;
   disabled?: boolean;
@@ -27,6 +35,9 @@ const Button: React.FC<ButtonProps> = ({
     justifyContent: "center",
     gap: "0.5rem",
     fontWeight: 600,
+    padding: "0.75rem 1.5rem",
+    borderRadius: "6px",
+    cursor: "pointer",
   };
 
   const getVariantStyles = (): React.CSSProperties => {
@@ -51,6 +62,27 @@ const Button: React.FC<ButtonProps> = ({
           backgroundColor: "transparent",
           color: "var(--primary-color)",
           padding: "0.5rem 0.75rem",
+        };
+      case "google":
+        return {
+          backgroundColor: "#FFFFFF",
+          color: "#000000",
+          border: "1px solid #ddd",
+        };
+      case "kakao":
+        return {
+          backgroundColor: "#FEE500",
+          color: "#000000",
+        };
+      case "github":
+        return {
+          backgroundColor: "#24292F",
+          color: "#FFFFFF",
+        };
+      case "naver":
+        return {
+          backgroundColor: "#03C75A",
+          color: "#FFFFFF",
         };
       default:
         return {};

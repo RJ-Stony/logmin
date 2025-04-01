@@ -28,6 +28,44 @@ const SocialLogin: React.FC = () => {
     window.location.href = "https://your-backend.com/auth/kakao";
   };
 
+  const handleGithubLogin = () => {
+    window.location.href = "https://your-backend.com/auth/github";
+  };
+
+  const handleNaverLogin = () => {
+    window.location.href = "https://your-backend.com/auth/naver";
+  };
+
+  const SocialButtonContent = ({
+    iconSrc,
+    alt,
+    label,
+    dividerColor = "rgba(0, 0, 0, 0.2)",
+  }: {
+    iconSrc: string;
+    alt: string;
+    label: string;
+    dividerColor?: string;
+  }) => (
+    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+      <img
+        src={iconSrc}
+        alt={alt}
+        width={20}
+        height={20}
+        style={{ display: "block" }}
+      />
+      <span
+        style={{
+          height: 20,
+          width: 1,
+          backgroundColor: dividerColor,
+        }}
+      />
+      <span>{label}</span>
+    </div>
+  );
+
   return (
     <div className="session-login">
       <div className="login-header">
@@ -35,8 +73,38 @@ const SocialLogin: React.FC = () => {
         <h2>Social</h2>
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <Button onClick={handleGoogleLogin}>Google 계정으로 로그인</Button>
-        <Button onClick={handleKakaoLogin}>Kakao 계정으로 로그인</Button>
+        <Button variant="google" onClick={handleGoogleLogin}>
+          <SocialButtonContent
+            iconSrc="/icons/google.svg"
+            alt="Google"
+            label="Google 계정으로 로그인"
+            dividerColor="#ccc"
+          />
+        </Button>
+        <Button variant="kakao" onClick={handleKakaoLogin}>
+          <SocialButtonContent
+            iconSrc="/icons/kakao.svg"
+            alt="Kakao"
+            label="Kakao 계정으로 로그인"
+            dividerColor="rgba(0,0,0,0.3)"
+          />
+        </Button>
+        <Button variant="github" onClick={handleGithubLogin}>
+          <SocialButtonContent
+            iconSrc="/icons/github.svg"
+            alt="Github"
+            label="Github 계정으로 로그인"
+            dividerColor="rgba(255,255,255,0.4)"
+          />
+        </Button>
+        <Button variant="naver" onClick={handleNaverLogin}>
+          <SocialButtonContent
+            iconSrc="/icons/naver.svg"
+            alt="Naver"
+            label="Naver 계정으로 로그인"
+            dividerColor="rgba(255,255,255,0.4)"
+          />
+        </Button>
       </div>
       <div className="auth-links">
         <a href="#" className="auth-link">
