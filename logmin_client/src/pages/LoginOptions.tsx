@@ -31,34 +31,9 @@ const LoginOptions: React.FC = () => {
             </svg>
           </div>
           <div className="option-text">
-            <span className="option-title">세션 방식</span>
+            <span className="option-title">Session</span>
             <span className="option-description">
               서버 측에서 유저 정보를 관리합니다
-            </span>
-          </div>
-        </button>
-
-        <button
-          className="auth-option-button cookie"
-          onClick={() => handleNavigate("/cookie")}
-        >
-          <div className="option-icon">
-            <svg
-              stroke="currentColor"
-              fill="currentColor"
-              stroke-width="0"
-              viewBox="0 0 24 24"
-              height="24px"
-              width="24px"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M12.007 1l.238 .005a6 6 0 0 1 5.405 3.974l.078 .233a6 6 0 0 1 -.182 4.08l-.093 .21l.05 -.002a2.94 2.94 0 0 1 2.638 1.511l.081 .158a2.887 2.887 0 0 1 -1.234 3.764l-.19 .096l-1.798 .821v.963l1.166 1.166l.14 .154a2.96 2.96 0 0 1 -.17 4.002c-1.087 1.088 -2.827 1.161 -4.03 .144l-.16 -.146l-1.946 -1.948l-1.946 1.947a2.96 2.96 0 0 1 -3.95 .22l-.15 -.128c-1.17 -1.073 -1.284 -2.879 -.234 -4.12l.146 -.158l1.134 -1.134v-.962l-1.834 -.84l-.181 -.093a2.88 2.88 0 0 1 -1.205 -3.75a2.93 2.93 0 0 1 2.646 -1.661l.13 .003l-.03 -.064a6.1 6.1 0 0 1 -.503 -1.968l-.017 -.26v-.217a6 6 0 0 1 5.775 -5.996l.224 -.004zm.003 15h-.01a1 1 0 0 0 0 2h.01a1 1 0 0 0 0 -2m0 -3h-.01a1 1 0 0 0 0 2h.01a1 1 0 0 0 0 -2m0 -5h-.01a1 1 0 0 0 0 2h.01a1 1 0 0 0 0 -2m-2 -3h-.01a1 1 0 1 0 0 2h.01a1 1 0 0 0 0 -2m4 0h-.01a1 1 0 0 0 0 2h.01a1 1 0 0 0 0 -2"></path>
-            </svg>
-          </div>
-          <div className="option-text">
-            <span className="option-title">쿠키 방식</span>
-            <span className="option-description">
-              브라우저에 쿠키를 저장합니다
             </span>
           </div>
         </button>
@@ -81,9 +56,67 @@ const LoginOptions: React.FC = () => {
             </svg>
           </div>
           <div className="option-text">
-            <span className="option-title">JWT 방식</span>
+            <span className="option-title">JWT</span>
             <span className="option-description">
               토큰 기반의 인증 방식입니다
+            </span>
+          </div>
+        </button>
+
+        <button
+          className="auth-option-button social"
+          onClick={() => handleNavigate("/social")}
+        >
+          <div className="option-icon">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              height="24px"
+              width="24px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M384 336a63.78 63.78 0 0 0-46.12 19.7l-148-83.27a63.85 63.85 0 0 0 0-32.86l148-83.27a63.8 63.8 0 1 0-15.73-27.87l-148 83.27a64 64 0 1 0 0 88.6l148 83.27A64 64 0 1 0 384 336z"></path>
+            </svg>
+          </div>
+          <div className="option-text">
+            <span className="option-title">Social</span>
+            <span className="option-description">
+              Google, Kakao 등 외부 계정을 이용합니다
+            </span>
+          </div>
+        </button>
+
+        <button
+          className="auth-option-button passwordless"
+          onClick={() => handleNavigate("/passwordless")}
+        >
+          <div className="option-icon">
+            <svg
+              stroke="currentColor"
+              fill="none"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              height="24px"
+              width="24px"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M4 8v-2a2 2 0 0 1 2 -2h2"></path>
+              <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+              <path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
+              <path d="M16 20h2a2 2 0 0 0 2 -2v-2"></path>
+              <path d="M9 10l.01 0"></path>
+              <path d="M15 10l.01 0"></path>
+              <path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
+            </svg>
+          </div>
+          <div className="option-text">
+            <span className="option-title">Passwordless</span>
+            <span className="option-description">
+              비밀번호 없이 간단히 로그인합니다
             </span>
           </div>
         </button>

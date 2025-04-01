@@ -69,7 +69,7 @@ const JWTLogin: React.FC = () => {
     <div className="jwt-login">
       <div className="login-header">
         <Button variant="back" onClick={() => navigate("/")} icon={backIcon} />
-        <h2>JWT 로그인</h2>
+        <h2>JWT</h2>
       </div>
       <form onSubmit={handleSubmit}>
         <Input

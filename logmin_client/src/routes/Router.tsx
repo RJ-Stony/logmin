@@ -3,8 +3,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "../components/common/Layout";
 import LoginOptions from "../pages/LoginOptions";
 import SessionLogin from "../components/session/SessionLogin";
-import CookieLogin from "../components/cookie/CookieLogin";
 import JWTLogin from "../components/jwt/JWTLogin";
+import SocialLogin from "../components/social/SocialLogin";
+import PasswordlessLogin from "../components/passwordless/PasswordlessLogin";
 
 const router = createBrowserRouter([
   {
@@ -13,8 +14,9 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <LoginOptions /> },
       { path: "/session", element: <SessionLogin /> },
-      { path: "/cookie", element: <CookieLogin /> },
       { path: "/jwt", element: <JWTLogin /> },
+      { path: "/social", element: <SocialLogin /> },
+      { path: "/passwordless", element: <PasswordlessLogin /> },
     ],
   },
 ]);

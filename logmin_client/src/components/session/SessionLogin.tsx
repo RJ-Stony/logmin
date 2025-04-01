@@ -93,7 +93,7 @@ const SessionLogin: React.FC = () => {
     <div className="session-login">
       <div className="login-header">
         <Button variant="back" onClick={() => navigate("/")} icon={backIcon} />
-        <h2>세션 로그인</h2>
+        <h2>Session</h2>
       </div>
       <form onSubmit={handleSubmit}>
         <Input
