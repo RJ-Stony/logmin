@@ -11,10 +11,10 @@ const SessionPasswordReset: React.FC = () => {
 
   const validateEmail = () => {
     if (!email) {
-      setError("이메일을 입력해주세요");
+      setError("이메일을 꼭 입력해주세요 !");
       return false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setError("유효한 이메일 형식이 아니에요");
+      setError("유효한 이메일 형식이 아니에요 !");
       return false;
     }
     setError(null);

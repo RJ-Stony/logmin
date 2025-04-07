@@ -18,15 +18,15 @@ const JWTLogin: React.FC = () => {
     let isValid = true;
 
     if (!email) {
-      newErrors.email = "이메일을 입력해주세요";
+      newErrors.email = "이메일을 꼭 입력해주세요 !";
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "유효한 이메일 형식이 아니에요";
+      newErrors.email = "유효한 이메일 형식이 아니에요 !";
       isValid = false;
     }
 
     if (!password) {
-      newErrors.password = "비밀번호를 입력해주세요";
+      newErrors.password = "비밀번호를 꼭 입력해주세요 !";
       isValid = false;
     }
 
