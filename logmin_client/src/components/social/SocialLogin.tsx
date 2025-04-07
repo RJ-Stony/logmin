@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import { IoIosArrowBack } from "react-icons/io";
 
@@ -112,12 +112,12 @@ const SocialLogin: React.FC = () => {
         </Button>
       </div>
       <div className="auth-links">
-        <a href="#" className="auth-link">
-          비밀번호로 로그인
-        </a>
-        <a href="#" className="auth-link">
-          이메일로 로그인
-        </a>
+        <Link to="/session" className="auth-link">
+          세션 방식으로 로그인
+        </Link>
+        <Link to="/jwt" className="auth-link">
+          JWT 방식으로 로그인
+        </Link>
       </div>
     </div>
   );

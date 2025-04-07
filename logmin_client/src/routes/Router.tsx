@@ -3,7 +3,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "../components/common/Layout";
 import LoginOptions from "../pages/LoginOptions";
 import SessionLogin from "../components/session/SessionLogin";
+import SessionPasswordReset from "../components/session/SessionPasswordReset";
+import SessionSignup from "../components/session/SessionSignup";
 import JWTLogin from "../components/jwt/JWTLogin";
+import JWTPasswordReset from "../components/jwt/JWTPasswordReset";
+import JWTSignup from "../components/jwt/JWTSignup";
 import SocialLogin from "../components/social/SocialLogin";
 import PasswordlessLogin from "../components/passwordless/PasswordlessLogin";
 
@@ -14,7 +18,11 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <LoginOptions /> },
       { path: "/session", element: <SessionLogin /> },
+      { path: "/session/reset-password", element: <SessionPasswordReset /> },
+      { path: "/session/signup", element: <SessionSignup /> },
       { path: "/jwt", element: <JWTLogin /> },
+      { path: "/jwt/reset-password", element: <JWTPasswordReset /> },
+      { path: "/jwt/signup", element: <JWTSignup /> },
       { path: "/social", element: <SocialLogin /> },
       { path: "/passwordless", element: <PasswordlessLogin /> },
     ],

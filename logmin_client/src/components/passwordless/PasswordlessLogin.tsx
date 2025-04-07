@@ -8,8 +8,8 @@ const PasswordlessLogin: React.FC = () => {
 
   const handleBiometricLogin = () => {
     // TODO: WebAuthn 등 생체 인증 연동
-    console.log("지문 또는 얼굴 인식으로 로그인 시도");
-    alert("지문 또는 얼굴 인식으로 로그인합니다 (모의)");
+    console.log("생체 정보로 로그인을 시도할게요");
+    alert("생체 정보로 로그인하겠습니다! (Test)");
   };
 
   const backIcon = <IoIosArrowBack />;
@@ -22,15 +22,7 @@ const PasswordlessLogin: React.FC = () => {
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <Button onClick={handleBiometricLogin}>
-          지문 또는 얼굴 인식으로 로그인
-        </Button>
-      </div>
-
-      <div className="auth-links">
-        <a href="#" className="auth-link">
-          다른 방식으로 로그인
-        </a>
+        <Button onClick={handleBiometricLogin}>생체 정보로 로그인</Button>
       </div>
     </div>
   );

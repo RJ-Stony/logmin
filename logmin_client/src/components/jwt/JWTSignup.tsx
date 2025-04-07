@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import { IoIosArrowBack } from "react-icons/io";
 
-const SessionLogin: React.FC = () => {
+const JWTSignup: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>(
-    {}
-  );
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState<{
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+  }>({});
+
   const navigate = useNavigate();
 
   const validateForm = () => {
-    const newErrors: { email?: string; password?: string } = {};
+    const newErrors: typeof errors = {};
     let isValid = true;
 
     if (!email) {
@@ -32,60 +36,55 @@ const SessionLogin: React.FC = () => {
       isValid = false;
     }
 
+    if (confirmPassword !== password) {
+      newErrors.confirmPassword = "비밀번호가 일치하지 않습니다";
+      isValid = false;
+    }
+
     setErrors(newErrors);
     return isValid;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     if (validateForm()) {
-      // TODO: 세션 로그인 API 연동 구현
-      console.log("세션 로그인 제출:", { email, password });
+      // TODO: API 연동 시 여기에 백엔드 요청 추가
+      console.log("JWT 회원가입 제출:", { email, password });
     }
   };
 
   const emailIcon = (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
       <path
-        d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
         fill="currentColor"
+        d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"
       />
     </svg>
   );
 
   const passwordIcon = (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
       <path
-        d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 17C10.9 17 10 16.1 10 15C10 13.9 10.9 13 12 13C13.1 13 14 13.9 14 15C14 16.1 13.1 17 12 17ZM15.1 8H8.9V6C8.9 4.29 10.29 2.9 12 2.9C13.71 2.9 15.1 4.29 15.1 6V8Z"
         fill="currentColor"
+        d="M18 8h-1V6a5 5 0 0 0-10 0v2H6c-1.1 0-2 .9-2 2v10a2 2 0 0 0 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2Zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm3.1-9H8.9V6a3.1 3.1 0 0 1 6.2 0v2Z"
       />
     </svg>
   );
 
-  const backIcon = <IoIosArrowBack />;
-
   return (
-    <div className="session-login">
+    <div className="jwt-login">
       <div className="login-header">
-        <Button variant="back" onClick={() => navigate("/")} icon={backIcon} />
-        <h2>Session</h2>
+        <Button
+          variant="back"
+          onClick={() => navigate("/jwt")}
+          icon={<IoIosArrowBack />}
+        />
+        <h2>JWT Sign Up</h2>
       </div>
+
       <form onSubmit={handleSubmit}>
         <Input
-          id="session-email"
+          id="jwt-signup-email"
           type="email"
           label="이메일"
           placeholder="이메일을 입력해주세요"
@@ -96,9 +95,8 @@ const SessionLogin: React.FC = () => {
           icon={emailIcon}
           autoComplete="email"
         />
-
         <Input
-          id="session-password"
+          id="jwt-signup-password"
           type="password"
           label="비밀번호"
           placeholder="비밀번호를 입력해주세요"
@@ -107,22 +105,24 @@ const SessionLogin: React.FC = () => {
           required
           error={errors.password}
           icon={passwordIcon}
-          autoComplete="current-password"
+          autoComplete="new-password"
         />
-
-        <Button type="submit">로그인</Button>
+        <Input
+          id="jwt-signup-confirm"
+          type="password"
+          label="비밀번호 확인"
+          placeholder="비밀번호를 다시 확인할게요"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+          error={errors.confirmPassword}
+          icon={passwordIcon}
+          autoComplete="new-password"
+        />
+        <Button type="submit">회원가입</Button>
       </form>
-
-      <div className="auth-links">
-        <Link to="/session/reset-password" className="auth-link">
-          비밀번호 찾기
-        </Link>
-        <Link to="/session/signup" className="auth-link">
-          회원가입
-        </Link>
-      </div>
     </div>
   );
 };
 
-export default SessionLogin;
+export default JWTSignup;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import { IoIosArrowBack } from "react-icons/io";
@@ -70,7 +70,7 @@ const JWTLogin: React.FC = () => {
           id="jwt-username"
           type="text"
           label="사용자 이름"
-          placeholder="사용자 이름을 입력하세요"
+          placeholder="사용자 이름을 입력해주세요"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
@@ -81,7 +81,7 @@ const JWTLogin: React.FC = () => {
           id="jwt-password"
           type="password"
           label="비밀번호"
-          placeholder="비밀번호를 입력하세요"
+          placeholder="비밀번호를 입력해주세요"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -92,12 +92,12 @@ const JWTLogin: React.FC = () => {
       </form>
 
       <div className="auth-links">
-        <a href="#" className="auth-link">
+        <Link to="/jwt/reset-password" className="auth-link">
           비밀번호 찾기
-        </a>
-        <a href="#" className="auth-link">
+        </Link>
+        <Link to="/jwt/signup" className="auth-link">
           회원가입
-        </a>
+        </Link>
       </div>
     </div>
   );
