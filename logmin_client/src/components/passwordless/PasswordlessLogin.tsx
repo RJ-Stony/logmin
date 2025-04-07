@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import { IoIosArrowBack } from "react-icons/io";
+import MagicLinkLogin from "./MagicLinkLogin";
+import { PiMagicWandLight } from "react-icons/pi";
+import OTPLogin from "./OTPLogin";
+import { TbPasswordMobilePhone } from "react-icons/tb";
+import BiometricLogin from "./BiometricLogin";
+import { TbFingerprintScan } from "react-icons/tb";
 
 const PasswordlessLogin: React.FC = () => {
   const navigate = useNavigate();
-
-  const handleBiometricLogin = () => {
-    // TODO: WebAuthn 등 생체 인증 연동
-    console.log("생체 정보로 로그인을 시도할게요");
-    alert("생체 정보 (Test)");
-  };
+  const [method, setMethod] = useState<"magic" | "otp" | "biometric">("magic");
 
   const backIcon = <IoIosArrowBack />;
 
@@ -21,8 +22,31 @@ const PasswordlessLogin: React.FC = () => {
         <h2>Passwordless</h2>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <Button onClick={handleBiometricLogin}>생체 정보로 로그인</Button>
+      <div className="tab-buttons">
+        <Button
+          className={`tab-button ${method === "magic" ? "active" : ""}`}
+          onClick={() => setMethod("magic")}
+        >
+          <PiMagicWandLight size="32" strokeWidth={0.5} />
+        </Button>
+        <Button
+          className={`tab-button ${method === "otp" ? "active" : ""}`}
+          onClick={() => setMethod("otp")}
+        >
+          <TbPasswordMobilePhone size="35" strokeWidth={1.1} />
+        </Button>
+        <Button
+          className={`tab-button ${method === "biometric" ? "active" : ""}`}
+          onClick={() => setMethod("biometric")}
+        >
+          <TbFingerprintScan size="40" strokeWidth={1.3} />
+        </Button>
+      </div>
+
+      <div className="method-content fade-in" style={{ marginTop: "0.7rem" }}>
+        {method === "magic" && <MagicLinkLogin />}
+        {method === "otp" && <OTPLogin />}
+        {method === "biometric" && <BiometricLogin />}
       </div>
     </div>
   );

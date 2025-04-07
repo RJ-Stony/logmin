@@ -167,6 +167,19 @@ form {
   gap: 1.5rem;
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1rem 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .input-wrapper {
   display: flex;
   flex-direction: column;
@@ -199,13 +212,19 @@ form {
   color: #bbc2d0;
 }
 
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
 /* 애니메이션 */
 @keyframes fadeIn {
   from {
     opacity: 0;
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -358,4 +377,32 @@ form {
 
 .auth-link:hover {
   text-decoration: underline;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.tab-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.tab-button.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
 }

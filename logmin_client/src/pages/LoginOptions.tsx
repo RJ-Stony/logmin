@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { TbFaceId } from "react-icons/tb";
 
 const LoginOptions: React.FC = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const LoginOptions: React.FC = () => {
             <svg
               stroke="currentColor"
               fill="currentColor"
-              stroke-width="0"
+              strokeWidth="0"
               viewBox="0 0 24 24"
               height="24px"
               width="24px"
@@ -33,7 +34,7 @@ const LoginOptions: React.FC = () => {
           <div className="option-text">
             <span className="option-title">Session</span>
             <span className="option-description">
-              서버 측에서 유저 정보를 관리합니다
+              서버 측에서 유저 정보를 관리해요
             </span>
           </div>
         </button>
@@ -46,7 +47,7 @@ const LoginOptions: React.FC = () => {
             <svg
               stroke="currentColor"
               fill="currentColor"
-              stroke-width="0"
+              strokeWidth="0"
               viewBox="0 0 512 512"
               height="24px"
               width="24px"
@@ -58,7 +59,7 @@ const LoginOptions: React.FC = () => {
           <div className="option-text">
             <span className="option-title">JWT</span>
             <span className="option-description">
-              토큰 기반의 인증 방식입니다
+              토큰 기반의 인증 방식이에요
             </span>
           </div>
         </button>
@@ -71,7 +72,7 @@ const LoginOptions: React.FC = () => {
             <svg
               stroke="currentColor"
               fill="currentColor"
-              stroke-width="0"
+              strokeWidth="0"
               viewBox="0 0 512 512"
               height="24px"
               width="24px"
@@ -83,40 +84,21 @@ const LoginOptions: React.FC = () => {
           <div className="option-text">
             <span className="option-title">Social</span>
             <span className="option-description">
-              Google, Kakao 등 외부 계정을 이용합니다
+              Google, Kakao 등 외부 계정을 이용해요
             </span>
           </div>
         </button>
-
         <button
           className="auth-option-button passwordless"
           onClick={() => handleNavigate("/passwordless")}
         >
           <div className="option-icon">
-            <svg
-              stroke="currentColor"
-              fill="none"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              height="24px"
-              width="24px"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M4 8v-2a2 2 0 0 1 2 -2h2"></path>
-              <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
-              <path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
-              <path d="M16 20h2a2 2 0 0 0 2 -2v-2"></path>
-              <path d="M9 10l.01 0"></path>
-              <path d="M15 10l.01 0"></path>
-              <path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
-            </svg>
+            <TbFaceId size="24" />
           </div>
           <div className="option-text">
             <span className="option-title">Passwordless</span>
             <span className="option-description">
-              비밀번호 없이 간단히 로그인합니다
+              비밀번호 없이도 chill하게 로그인할 수 있어요
             </span>
           </div>
         </button>
