@@ -5,10 +5,10 @@ import Input from "../common/Input";
 import { IoIosArrowBack } from "react-icons/io";
 
 const JWTLogin: React.FC = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{
-    username?: string;
+    email?: string;
     password?: string;
   }>({});
   const navigate = useNavigate();
@@ -17,8 +17,11 @@ const JWTLogin: React.FC = () => {
     const newErrors: typeof errors = {};
     let isValid = true;
 
-    if (!username) {
-      newErrors.username = "사용자 이름을 입력해주세요";
+    if (!email) {
+      newErrors.email = "이메일을 입력해주세요";
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = "유효한 이메일 형식이 아니에요";
       isValid = false;
     }
 
@@ -35,16 +38,22 @@ const JWTLogin: React.FC = () => {
     e.preventDefault();
     if (validateForm()) {
       // TODO: JWT 로그인 API 연동
-      console.log("JWT 로그인 제출:", { username, password });
+      console.log("JWT 로그인 제출:", { email, password });
     }
   };
 
   const backIcon = <IoIosArrowBack />;
 
-  const userIcon = (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+  const emailIcon = (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
-        d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"
+        d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"
         fill="currentColor"
       />
     </svg>
@@ -67,15 +76,16 @@ const JWTLogin: React.FC = () => {
       </div>
       <form onSubmit={handleSubmit}>
         <Input
-          id="jwt-username"
-          type="text"
-          label="사용자 이름"
-          placeholder="사용자 이름을 입력해주세요"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          id="jwt-email"
+          type="email"
+          label="이메일"
+          placeholder="이메일을 입력해주세요"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
-          error={errors.username}
-          icon={userIcon}
+          error={errors.email}
+          icon={emailIcon}
+          autoComplete="email"
         />
         <Input
           id="jwt-password"

@@ -9,7 +9,7 @@ const PasswordlessLogin: React.FC = () => {
   const handleBiometricLogin = () => {
     // TODO: WebAuthn 등 생체 인증 연동
     console.log("생체 정보로 로그인을 시도할게요");
-    alert("생체 정보로 로그인하겠습니다! (Test)");
+    alert("생체 정보 (Test)");
   };
 
   const backIcon = <IoIosArrowBack />;

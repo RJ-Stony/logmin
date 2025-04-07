@@ -20,7 +20,7 @@ const SessionLogin: React.FC = () => {
       newErrors.email = "이메일을 입력해주세요";
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(email)) {
-      newErrors.email = "유효한 이메일 형식이 아닙니다";
+      newErrors.email = "유효한 이메일 형식이 아니에요";
       isValid = false;
     }
 
@@ -28,7 +28,7 @@ const SessionLogin: React.FC = () => {
       newErrors.password = "비밀번호를 입력해주세요";
       isValid = false;
     } else if (password.length < 6) {
-      newErrors.password = "비밀번호는 최소 6자 이상이어야 합니다";
+      newErrors.password = "최소 6자 이상이어야 해요";
       isValid = false;
     }
 
