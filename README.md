@@ -1,6 +1,8 @@
 # 🔥 Logmin Project 🔥
 
 ## 🚀 프로젝트 소개
+![image](https://github.com/user-attachments/assets/6e138707-7faa-41ba-8fdd-7f24dda1153d)
+![image](https://github.com/user-attachments/assets/7350effc-a147-4560-b67c-c06cd60082c0)
 
 ## 💻 기술 스택
 
@@ -41,4 +43,4 @@
 
 ## 📝 License
 
-MIT
+* MIT
