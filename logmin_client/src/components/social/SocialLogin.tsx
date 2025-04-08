@@ -40,7 +40,6 @@ const SocialLogin: React.FC = () => {
         display: "flex",
         alignItems: "center",
         width: "100%",
-        gap: "0.75rem",
         whiteSpace: "nowrap",
         justifyContent: "flex-start",
       }}
@@ -83,7 +82,7 @@ const SocialLogin: React.FC = () => {
               <SocialButtonContent
                 iconSrc={`/icons/${provider}.svg`}
                 alt={provider}
-                label={providerLabel[provider]}
+                label={`${providerLabel[provider]}로 로그인`}
                 dividerColor={
                   provider === "github"
                     ? "rgba(255,255,255,0.6)"
@@ -106,7 +105,7 @@ const SocialLogin: React.FC = () => {
               <SocialButtonContent
                 iconSrc={`/icons/${provider}.svg`}
                 alt={provider}
-                label={providerLabel[provider]}
+                label={`${providerLabel[provider]}로 로그인`}
                 dividerColor={
                   provider === "github"
                     ? "rgba(255,255,255,0.6)"
