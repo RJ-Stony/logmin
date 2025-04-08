@@ -19,7 +19,61 @@ interface ButtonProps {
   icon?: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const baseStyles: Record<string, React.CSSProperties> = {
+  default: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.5rem",
+    fontWeight: 600,
+    padding: "0.75rem 1rem",
+    borderRadius: "6px",
+    cursor: "pointer",
+  },
+  back: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    padding: "0",
+    borderRadius: "0",
+    width: "auto",
+    height: "auto",
+    cursor: "pointer",
+  },
+};
+
+const variantStyles: Record<string, React.CSSProperties> = {
+  outline: {
+    backgroundColor: "transparent",
+    color: "var(--primary-color)",
+    border: "1px solid var(--primary-color)",
+  },
+  text: {
+    backgroundColor: "transparent",
+    color: "var(--primary-color)",
+    padding: "0.5rem 0.75rem",
+  },
+  google: {
+    backgroundColor: "#FFFFFF",
+    color: "#000000",
+    border: "1px solid #ddd",
+  },
+  kakao: {
+    backgroundColor: "#FEE500",
+    color: "#000000",
+  },
+  github: {
+    backgroundColor: "#24292F",
+    color: "#FFFFFF",
+  },
+  naver: {
+    backgroundColor: "#03C75A",
+    color: "#FFFFFF",
+  },
+};
+
+const Button = ({
   children,
   onClick,
   type = "button",
@@ -28,85 +82,19 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
   disabled = false,
   icon,
-}) => {
-  // ✅ variant에 따라 baseStyles를 다르게 적용
-  const getBaseStyles = (): React.CSSProperties => {
-    if (variant === "back") {
-      return {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        cursor: "pointer",
-        backgroundColor: "transparent",
-        padding: "0",
-        borderRadius: "0",
-        width: "auto",
-        height: "auto",
-      };
-    }
-
-    return {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "0.5rem",
-      fontWeight: 600,
-      padding: "0.75rem 1rem",
-      borderRadius: "6px",
-      cursor: "pointer",
-    };
+}: ButtonProps) => {
+  const combinedStyle = {
+    ...baseStyles[variant === "back" ? "back" : "default"],
+    ...(variantStyles[variant] || {}),
+    ...style,
   };
-
-  const getVariantStyles = (): React.CSSProperties => {
-    switch (variant) {
-      case "outline":
-        return {
-          backgroundColor: "transparent",
-          color: "var(--primary-color)",
-          border: "1px solid var(--primary-color)",
-        };
-      case "text":
-        return {
-          backgroundColor: "transparent",
-          color: "var(--primary-color)",
-          padding: "0.5rem 0.75rem",
-        };
-      case "google":
-        return {
-          backgroundColor: "#FFFFFF",
-          color: "#000000",
-          border: "1px solid #ddd",
-        };
-      case "kakao":
-        return {
-          backgroundColor: "#FEE500",
-          color: "#000000",
-        };
-      case "github":
-        return {
-          backgroundColor: "#24292F",
-          color: "#FFFFFF",
-        };
-      case "naver":
-        return {
-          backgroundColor: "#03C75A",
-          color: "#FFFFFF",
-        };
-      default:
-        return {};
-    }
-  };
-
-  const buttonClassName = `${className} ${variant} ${
-    disabled ? "disabled" : ""
-  }`;
 
   return (
     <button
       type={type}
       onClick={onClick}
-      style={{ ...getBaseStyles(), ...getVariantStyles(), ...style }}
-      className={buttonClassName}
+      style={combinedStyle}
+      className={`${className} ${variant} ${disabled ? "disabled" : ""}`}
       disabled={disabled}
     >
       {icon && <span className="button-icon">{icon}</span>}

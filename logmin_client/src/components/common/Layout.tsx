@@ -1,7 +1,8 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
 
-const Layout: React.FC = () => {
+function Layout() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="layout">
       <header>
@@ -11,10 +12,10 @@ const Layout: React.FC = () => {
         <Outlet />
       </main>
       <footer>
-        <p>© {new Date().getFullYear()} Logmin</p>
+        <p>© {currentYear} Logmin</p>
       </footer>
     </div>
   );
-};
+}
 
 export default Layout;

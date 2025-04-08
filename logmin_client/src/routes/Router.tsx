@@ -1,28 +1,44 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import Layout from "../components/common/Layout";
+import ErrorPage from "../pages/ErrorPage";
+
 import LoginOptions from "../pages/LoginOptions";
+
 import SessionLogin from "../components/session/SessionLogin";
 import SessionPasswordReset from "../components/session/SessionPasswordReset";
 import SessionSignup from "../components/session/SessionSignup";
+
 import JWTLogin from "../components/jwt/JWTLogin";
 import JWTPasswordReset from "../components/jwt/JWTPasswordReset";
 import JWTSignup from "../components/jwt/JWTSignup";
+
 import SocialLogin from "../components/social/SocialLogin";
 import PasswordlessLogin from "../components/passwordless/PasswordlessLogin";
 
 const router = createBrowserRouter([
   {
     element: <Layout />,
-    errorElement: <div>에러가 발생했습니다. 잠시 후 다시 시도해 주세요.</div>,
+    errorElement: <ErrorPage />,
     children: [
       { path: "/", element: <LoginOptions /> },
-      { path: "/session", element: <SessionLogin /> },
-      { path: "/session/reset-password", element: <SessionPasswordReset /> },
-      { path: "/session/signup", element: <SessionSignup /> },
-      { path: "/jwt", element: <JWTLogin /> },
-      { path: "/jwt/reset-password", element: <JWTPasswordReset /> },
-      { path: "/jwt/signup", element: <JWTSignup /> },
+      {
+        path: "/session",
+        children: [
+          { index: true, element: <SessionLogin /> },
+          { path: "reset-password", element: <SessionPasswordReset /> },
+          { path: "signup", element: <SessionSignup /> },
+        ],
+      },
+      {
+        path: "/jwt",
+        children: [
+          { index: true, element: <JWTLogin /> },
+          { path: "reset-password", element: <JWTPasswordReset /> },
+          { path: "signup", element: <JWTSignup /> },
+        ],
+      },
       { path: "/social", element: <SocialLogin /> },
       { path: "/passwordless", element: <PasswordlessLogin /> },
     ],

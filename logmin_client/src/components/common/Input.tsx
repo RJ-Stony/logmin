@@ -13,7 +13,7 @@ interface InputProps {
   autoComplete?: string;
 }
 
-const Input: React.FC<InputProps> = ({
+function Input({
   id,
   type = "text",
   placeholder = "",
@@ -23,8 +23,11 @@ const Input: React.FC<InputProps> = ({
   required = false,
   error,
   icon,
-  autoComplete,
-}) => {
+  autoComplete = "off",
+}: InputProps) {
+  const hasError = !!error;
+  const hasIcon = !!icon;
+
   return (
     <div className="input-wrapper">
       {label && (
@@ -33,8 +36,8 @@ const Input: React.FC<InputProps> = ({
           {required && <span className="required-mark">*</span>}
         </label>
       )}
-      <div className={`input-container ${error ? "has-error" : ""}`}>
-        {icon && <span className="input-icon">{icon}</span>}
+      <div className={`input-container ${hasError ? "has-error" : ""}`}>
+        {hasIcon && <span className="input-icon">{icon}</span>}
         <input
           id={id}
           type={type}
@@ -42,13 +45,13 @@ const Input: React.FC<InputProps> = ({
           value={value}
           onChange={onChange}
           required={required}
-          className={`input-field ${icon ? "has-icon" : ""}`}
+          className={`input-field ${hasIcon ? "has-icon" : ""}`}
           autoComplete={autoComplete}
         />
       </div>
-      {error && <p className="input-error">{error}</p>}
+      {hasError && <p className="input-error">{error}</p>}
     </div>
   );
-};
+}
 
 export default Input;

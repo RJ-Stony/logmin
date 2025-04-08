@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import { IoIosArrowBack } from "react-icons/io";
+import { isValidEmail } from "../../utils/validation";
+import { EmailIcon, PasswordIcon } from "../icons";
 
-const JWTSignup: React.FC = () => {
+function JWTSignup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -13,63 +15,33 @@ const JWTSignup: React.FC = () => {
     password?: string;
     confirmPassword?: string;
   }>({});
-
   const navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors: typeof errors = {};
-    let isValid = true;
 
-    if (!email) {
-      newErrors.email = "이메일을 꼭 입력해주세요 !";
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
+    if (!email) newErrors.email = "이메일을 꼭 입력해주세요 !";
+    else if (!isValidEmail(email))
       newErrors.email = "유효한 이메일 형식이 아니에요 !";
-      isValid = false;
-    }
 
-    if (!password) {
-      newErrors.password = "비밀번호를 꼭 입력해주세요 !";
-      isValid = false;
-    } else if (password.length < 6) {
+    if (!password) newErrors.password = "비밀번호를 꼭 입력해주세요 !";
+    else if (password.length < 6)
       newErrors.password = "비밀번호는 최소 6자 이상이어야 해요 !";
-      isValid = false;
-    }
 
-    if (confirmPassword !== password) {
+    if (confirmPassword !== password)
       newErrors.confirmPassword = "비밀번호가 일치하지 않아요 !";
-      isValid = false;
-    }
 
     setErrors(newErrors);
-    return isValid;
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
-      // TODO: API 연동 시 여기에 백엔드 요청 추가
       console.log("JWT 회원가입 제출:", { email, password });
+      // TODO: 백엔드 API 연동
     }
   };
-
-  const emailIcon = (
-    <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-      <path
-        fill="currentColor"
-        d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"
-      />
-    </svg>
-  );
-
-  const passwordIcon = (
-    <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
-      <path
-        fill="currentColor"
-        d="M18 8h-1V6a5 5 0 0 0-10 0v2H6c-1.1 0-2 .9-2 2v10a2 2 0 0 0 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2Zm-6 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4Zm3.1-9H8.9V6a3.1 3.1 0 0 1 6.2 0v2Z"
-      />
-    </svg>
-  );
 
   return (
     <div className="jwt-login">
@@ -92,7 +64,7 @@ const JWTSignup: React.FC = () => {
           onChange={(e) => setEmail(e.target.value)}
           required
           error={errors.email}
-          icon={emailIcon}
+          icon={<EmailIcon />}
           autoComplete="email"
         />
         <Input
@@ -104,7 +76,7 @@ const JWTSignup: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
           error={errors.password}
-          icon={passwordIcon}
+          icon={<PasswordIcon />}
           autoComplete="new-password"
         />
         <Input
@@ -116,13 +88,13 @@ const JWTSignup: React.FC = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
           error={errors.confirmPassword}
-          icon={passwordIcon}
+          icon={<PasswordIcon />}
           autoComplete="new-password"
         />
         <Button type="submit">회원가입</Button>
       </form>
     </div>
   );
-};
+}
 
 export default JWTSignup;
