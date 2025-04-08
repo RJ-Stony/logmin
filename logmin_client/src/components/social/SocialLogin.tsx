@@ -1,27 +1,25 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import { IoIosArrowBack } from "react-icons/io";
 
 const SocialLogin: React.FC = () => {
   const navigate = useNavigate();
-
   const backIcon = <IoIosArrowBack />;
 
-  const handleGoogleLogin = () => {
-    window.location.href = "https://your-backend.com/auth/google";
+  const sessionBase = "https://backend.com/session/auth";
+  const jwtBase = "https://backend.com/jwt/auth";
+
+  const handleLogin = (provider: string, method: "session" | "jwt") => {
+    const base = method === "session" ? sessionBase : jwtBase;
+    window.location.href = `${base}/${provider}`;
   };
 
-  const handleKakaoLogin = () => {
-    window.location.href = "https://your-backend.com/auth/kakao";
-  };
-
-  const handleGithubLogin = () => {
-    window.location.href = "https://your-backend.com/auth/github";
-  };
-
-  const handleNaverLogin = () => {
-    window.location.href = "https://your-backend.com/auth/naver";
+  const providerLabel: Record<string, string> = {
+    google: "구글",
+    kakao: "카카오",
+    github: "깃허브",
+    naver: "네이버",
   };
 
   const SocialButtonContent = ({
@@ -37,34 +35,28 @@ const SocialLogin: React.FC = () => {
     dividerColor?: string;
     iconBoxWidth?: number;
   }) => (
-    <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
-      {/* 아이콘 + 세로선 (고정 너비) */}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
+        gap: "0.75rem",
+        whiteSpace: "nowrap",
+        justifyContent: "flex-start",
+      }}
+    >
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          gap: "0.75rem",
+          gap: "1rem",
           width: `${iconBoxWidth}px`,
           justifyContent: "flex-start",
         }}
       >
-        <img
-          src={iconSrc}
-          alt={alt}
-          width={20}
-          height={20}
-          style={{ display: "block" }}
-        />
-        <span
-          style={{
-            height: 20,
-            width: 1,
-            backgroundColor: dividerColor,
-          }}
-        />
+        <img src={iconSrc} alt={alt} width={20} height={20} />
+        <span style={{ height: 20, width: 1, backgroundColor: dividerColor }} />
       </div>
-
-      {/* 텍스트 영역 (유동적) */}
       <div style={{ flex: 1 }}>
         <span>{label}</span>
       </div>
@@ -72,52 +64,58 @@ const SocialLogin: React.FC = () => {
   );
 
   return (
-    <div className="session-login">
+    <div className="session-login social-login">
       <div className="login-header">
         <Button variant="back" onClick={() => navigate("/")} icon={backIcon} />
         <h2>Social</h2>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-        <Button variant="google" onClick={handleGoogleLogin}>
-          <SocialButtonContent
-            iconSrc="/icons/google.svg"
-            alt="Google"
-            label="구글로 로그인"
-            dividerColor="#ccc"
-          />
-        </Button>
-        <Button variant="kakao" onClick={handleKakaoLogin}>
-          <SocialButtonContent
-            iconSrc="/icons/kakao.svg"
-            alt="Kakao"
-            label="카카오로 로그인"
-            dividerColor="rgba(0,0,0,0.3)"
-          />
-        </Button>
-        <Button variant="github" onClick={handleGithubLogin}>
-          <SocialButtonContent
-            iconSrc="/icons/github.svg"
-            alt="Github"
-            label="깃허브로 로그인"
-            dividerColor="rgba(255,255,255,0.4)"
-          />
-        </Button>
-        <Button variant="naver" onClick={handleNaverLogin}>
-          <SocialButtonContent
-            iconSrc="/icons/naver.svg"
-            alt="Naver"
-            label="네이버로 로그인"
-            dividerColor="rgba(255,255,255,0.4)"
-          />
-        </Button>
-      </div>
-      <div className="auth-links">
-        <Link to="/session" className="auth-link">
-          세션 방식으로 로그인
-        </Link>
-        <Link to="/jwt" className="auth-link">
-          JWT 방식으로 로그인
-        </Link>
+
+      <div className="social-login-columns">
+        {/* 세션 방식 소셜 로그인 */}
+        <div className="social-login-column">
+          <h3>Session</h3>
+          {["google", "kakao", "github", "naver"].map((provider) => (
+            <Button
+              key={provider}
+              variant={provider as "google" | "kakao" | "github" | "naver"}
+              onClick={() => handleLogin(provider, "session")}
+            >
+              <SocialButtonContent
+                iconSrc={`/icons/${provider}.svg`}
+                alt={provider}
+                label={providerLabel[provider]}
+                dividerColor={
+                  provider === "github"
+                    ? "rgba(255,255,255,0.6)"
+                    : "rgba(0,0,0,0.2)"
+                }
+              />
+            </Button>
+          ))}
+        </div>
+
+        {/* JWT 방식 소셜 로그인 */}
+        <div className="social-login-column">
+          <h3>JWT</h3>
+          {["google", "kakao", "github", "naver"].map((provider) => (
+            <Button
+              key={provider}
+              variant={provider as "google" | "kakao" | "github" | "naver"}
+              onClick={() => handleLogin(provider, "jwt")}
+            >
+              <SocialButtonContent
+                iconSrc={`/icons/${provider}.svg`}
+                alt={provider}
+                label={providerLabel[provider]}
+                dividerColor={
+                  provider === "github"
+                    ? "rgba(255,255,255,0.6)"
+                    : "rgba(0,0,0,0.2)"
+                }
+              />
+            </Button>
+          ))}
+        </div>
       </div>
     </div>
   );

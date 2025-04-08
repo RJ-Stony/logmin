@@ -51,7 +51,7 @@ const Button: React.FC<ButtonProps> = ({
       justifyContent: "center",
       gap: "0.5rem",
       fontWeight: 600,
-      padding: "0.75rem 1.5rem",
+      padding: "0.75rem 1rem",
       borderRadius: "6px",
       cursor: "pointer",
     };

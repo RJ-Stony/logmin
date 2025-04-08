@@ -98,7 +98,7 @@ const LoginOptions: React.FC = () => {
           <div className="option-text">
             <span className="option-title">Passwordless</span>
             <span className="option-description">
-              비밀번호 없이도 chill하게 로그인할 수 있어요
+              비밀번호 없이도 <i>Chill</i> 하게 로그인해요
             </span>
           </div>
         </button>
