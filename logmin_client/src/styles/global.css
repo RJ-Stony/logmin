@@ -407,13 +407,19 @@ form {
   border-color: var(--primary-color);
 }
 
+.social-login-tab-content.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+  margin-top: 1.5rem;
+}
+
 .social-login {
-  max-width: 800px;
+  max-width: 420px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #ffffff;
+  background-color: var(--surface-color);
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
 }
 
 .social-login-columns {
@@ -435,4 +441,9 @@ form {
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-secondary);
+}
+
+.social-login-tab-content {
+  animation: fadeIn 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
