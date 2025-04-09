@@ -1,8 +1,9 @@
 # 🔥 Logmin Project 🔥
 
 ## 🚀 프로젝트 소개
-![image](https://github.com/user-attachments/assets/6e138707-7faa-41ba-8fdd-7f24dda1153d)
-![image](https://github.com/user-attachments/assets/7350effc-a147-4560-b67c-c06cd60082c0)
+![image](https://github.com/user-attachments/assets/aaca66b1-1456-4f06-9724-cef554096086)
+![image](https://github.com/user-attachments/assets/980372a6-e650-4fb2-bd0f-7bd8abefbfae)
+![image](https://github.com/user-attachments/assets/93c11368-d82c-4078-98a9-c904dbb7e262)
 
 ## 💻 기술 스택
 
