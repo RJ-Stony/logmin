@@ -37,7 +37,7 @@ function SessionLogin() {
     try {
       await sessionLogin(email, password);
       alert("로그인 성공!");
-      navigate("/dashboard");
+      navigate("/");
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error("로그인 실패:", error.message);
