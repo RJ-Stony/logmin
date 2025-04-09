@@ -5,6 +5,7 @@ import Input from "../common/Input";
 import { IoIosArrowBack } from "react-icons/io";
 import { isValidEmail } from "../../utils/validation";
 import { EmailIcon } from "../icons";
+import { jwtResetPassword } from "../../api/jwt";
 
 function JWTPasswordReset() {
   const [email, setEmail] = useState("");
@@ -24,11 +25,21 @@ function JWTPasswordReset() {
     return true;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (validateEmail()) {
-      console.log("JWT 비밀번호 재설정 요청:", email);
-      // TODO: API 요청 연동
+    if (!validateEmail()) return;
+
+    try {
+      await jwtResetPassword(email);
+      alert("비밀번호 재설정 메일이 전송되었어요 ✉️");
+      navigate("/jwt");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("재설정 실패:", error.message);
+        alert("메일 전송에 실패했어요. 다시 시도해주세요!");
+      } else {
+        alert("알 수 없는 오류가 발생했어요.");
+      }
     }
   };
 

@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import { IoIosArrowBack } from "react-icons/io";
-import { isValidEmail } from "../../utils/validation";
+import { isValidEmail, isValidPassword } from "../../utils/validation";
 import { EmailIcon, PasswordIcon } from "../icons";
+import { jwtLogin } from "../../api/jwt";
 
 function JWTLogin() {
   const [email, setEmail] = useState("");
@@ -22,16 +23,30 @@ function JWTLogin() {
       newErrors.email = "유효한 이메일 형식이 아니에요 !";
 
     if (!password) newErrors.password = "비밀번호를 꼭 입력해주세요 !";
+    else if (!isValidPassword(password))
+      newErrors.password = "최소 6자 이상이어야 해요 !";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("JWT 로그인 제출:", { email, password });
-      // TODO: API 연동
+    if (!validateForm()) return;
+
+    try {
+      const response = await jwtLogin(email, password);
+      const token = response.data.token;
+      localStorage.setItem("jwtToken", token);
+      alert("로그인 성공!");
+      navigate("/");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("JWT 로그인 실패:", error.message);
+        alert("로그인에 실패했어요. 다시 시도해주세요!");
+      } else {
+        alert("알 수 없는 오류가 발생했어요.");
+      }
     }
   };
 
