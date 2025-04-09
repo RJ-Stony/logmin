@@ -17,7 +17,6 @@ export const SocialButtonContent = ({
       alignItems: "center",
       width: "100%",
       justifyContent: "flex-start",
-      gap: "0.75rem",
     }}
   >
     <div
