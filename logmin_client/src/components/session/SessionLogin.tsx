@@ -5,6 +5,7 @@ import Input from "../common/Input";
 import { IoIosArrowBack } from "react-icons/io";
 import { isValidEmail, isValidPassword } from "../../utils/validation";
 import { EmailIcon, PasswordIcon } from "../icons";
+import { sessionLogin } from "../../api/session";
 
 function SessionLogin() {
   const [email, setEmail] = useState("");
@@ -29,11 +30,22 @@ function SessionLogin() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("세션 로그인 제출:", { email, password });
-      // TODO: API 연동
+    if (!validateForm()) return;
+
+    try {
+      await sessionLogin(email, password);
+      alert("로그인 성공!");
+      navigate("/dashboard");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("로그인 실패:", error.message);
+        alert("로그인에 실패했어요. 다시 시도해주세요!");
+      } else {
+        console.error("알 수 없는 오류:", error);
+        alert("예기치 못한 오류가 발생했어요.");
+      }
     }
   };
 
@@ -60,7 +72,6 @@ function SessionLogin() {
           icon={<EmailIcon />}
           autoComplete="email"
         />
-
         <Input
           id="session-password"
           type="password"
@@ -73,7 +84,6 @@ function SessionLogin() {
           icon={<PasswordIcon />}
           autoComplete="current-password"
         />
-
         <Button type="submit">로그인</Button>
       </form>
 

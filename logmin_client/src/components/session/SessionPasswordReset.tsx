@@ -5,6 +5,7 @@ import Input from "../common/Input";
 import { IoIosArrowBack } from "react-icons/io";
 import { isValidEmail } from "../../utils/validation";
 import { EmailIcon } from "../icons";
+import { sessionResetPassword } from "../../api/session";
 
 function SessionPasswordReset() {
   const [email, setEmail] = useState("");
@@ -24,11 +25,21 @@ function SessionPasswordReset() {
     return true;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateEmail()) {
-      console.log("비밀번호 재설정 이메일 전송:", email);
-      // TODO: 백엔드 API 호출
+      try {
+        await sessionResetPassword(email);
+        alert("비밀번호 재설정 메일이 전송되었어요 ✉️");
+        navigate("/session");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error("재설정 실패:", error.message);
+          alert("메일 전송에 실패했어요. 다시 시도해주세요!");
+        } else {
+          alert("알 수 없는 오류가 발생했어요.");
+        }
+      }
     }
   };
 

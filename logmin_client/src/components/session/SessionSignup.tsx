@@ -4,11 +4,12 @@ import Button from "../common/Button";
 import Input from "../common/Input";
 import { IoIosArrowBack } from "react-icons/io";
 import {
-  isMatchingPasswords,
   isValidEmail,
   isValidPassword,
+  isMatchingPasswords,
 } from "../../utils/validation";
 import { EmailIcon, PasswordIcon } from "../icons";
+import { sessionSignup } from "../../api/session";
 
 function SessionSignup() {
   const [email, setEmail] = useState("");
@@ -32,18 +33,28 @@ function SessionSignup() {
     else if (!isValidPassword(password))
       newErrors.password = "비밀번호는 최소 6자 이상이어야 해요 !";
 
-    if (!isMatchingPasswords(confirmPassword, password))
+    if (!isMatchingPasswords(password, confirmPassword))
       newErrors.confirmPassword = "비밀번호가 일치하지 않아요 !";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log("회원가입 제출:", { email, password });
-      // TODO: 세션 회원가입 API 연동
+      try {
+        await sessionSignup(email, password);
+        alert("회원가입 성공! 로그인 해주세요 🙌🏻");
+        navigate("/session");
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.error("회원가입 실패:", error.message);
+          alert("회원가입에 실패했어요. 다시 시도해주세요!");
+        } else {
+          alert("알 수 없는 오류가 발생했어요.");
+        }
+      }
     }
   };
 
