@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import { IoIosArrowBack } from "react-icons/io";
-import { isValidEmail } from "../../utils/validation";
+import {
+  isMatchingPasswords,
+  isValidEmail,
+  isValidPassword,
+} from "../../utils/validation";
 import { EmailIcon, PasswordIcon } from "../icons";
 
 function SessionSignup() {
@@ -25,10 +29,10 @@ function SessionSignup() {
       newErrors.email = "유효한 이메일 형식이 아니에요 !";
 
     if (!password) newErrors.password = "비밀번호를 꼭 입력해주세요 !";
-    else if (password.length < 6)
+    else if (!isValidPassword(password))
       newErrors.password = "비밀번호는 최소 6자 이상이어야 해요 !";
 
-    if (confirmPassword !== password)
+    if (!isMatchingPasswords(confirmPassword, password))
       newErrors.confirmPassword = "비밀번호가 일치하지 않아요 !";
 
     setErrors(newErrors);
